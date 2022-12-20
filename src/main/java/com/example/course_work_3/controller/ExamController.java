@@ -1,5 +1,6 @@
 package com.example.course_work_3.controller;
 
+import com.example.course_work_3.MoreExpectedQuestionsThenTheyAreException;
 import com.example.course_work_3.service.ExaminerServiceImpl;
 import com.example.course_work_3.model.Question;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,7 +21,7 @@ public class ExamController {
     }
 
     @GetMapping
-    public Set<Question> questionSet(@RequestParam int amount){
+    public Set<Question> getRandomQuestions(@RequestParam int amount) throws MoreExpectedQuestionsThenTheyAreException {
         return examinerService.getQuestions(amount);
     }
 }

@@ -1,7 +1,5 @@
 package com.example.course_work_3.model;
 
-import org.springframework.stereotype.Repository;
-
 import java.util.Objects;
 
 
