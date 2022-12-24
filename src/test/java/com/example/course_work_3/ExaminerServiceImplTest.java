@@ -13,8 +13,6 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.Set;
 
-
-
 @ExtendWith(MockitoExtension.class)
 public class ExaminerServiceImplTest {
 
@@ -38,14 +36,14 @@ public class ExaminerServiceImplTest {
 
     @Test
     public void getRandomQuestions() throws MoreExpectedQuestionsThenTheyAreException {
-        Assertions.assertEquals(examinerService.getQuestions(1), javaQuestionService.getAllQuestions());
+        Mockito.when(javaQuestionService.getRandomQuestion()).thenReturn(question1, question2);
+        Assertions.assertEquals(javaQuestionService.getAllQuestions(), examinerService.getQuestions(2));
     }
 
     @Test
     public void moreExpectedQuestionsThenTheyAreException() {
-        JavaQuestionService javaQuestionService1 = new JavaQuestionService(Set.of(question1,question2));
-        ExaminerServiceImpl examinerService1 = new ExaminerServiceImpl(javaQuestionService1);
-        Assertions.assertThrows(MoreExpectedQuestionsThenTheyAreException.class, () -> examinerService1.getQuestions(3));
+        Assertions.assertThrows(MoreExpectedQuestionsThenTheyAreException.class,
+                () -> examinerService.getQuestions(3));
     }
 
 }
